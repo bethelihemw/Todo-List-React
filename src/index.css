@@ -1,68 +1,156 @@
+
+/* ToDoList.css */
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+  --bg: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  --card-bg: #ffffffcc;
+  --accent: #6366f1;          /* indigo‑500 */
+  --accent-dark: #4f46e5;     /* indigo‑600 */
+  --danger: #ef4444;          /* red‑500  */
+  --danger-dark: #dc2626;     /* red‑600  */
+  --text: #111827;
+  --shadow: 0 10px 25px -8px rgba(0, 0, 0, .15);
+  font-family: "Inter", "Segoe UI", system-ui, sans-serif;
 }
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
   min-height: 100vh;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text);
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.todolist {
+  width: min(90vw, 35rem);
+  padding: 2.5rem 2rem 3rem;
+  border-radius: 1.5rem;
+  backdrop-filter: blur(8px);
+  background: var(--card-bg);
+  box-shadow: var(--shadow);
+  transition: transform .3s ease;
+}
+
+.todolist:hover {
+  transform: translateY(-4px);
+}
+
+.todolist h1 {
+  text-align: center;
+  margin-top: 0;
+  letter-spacing: .05em;
+  font-weight: 700;
+}
+
+.todolist > div:first-of-type {
+  display: flex;
+  gap: .75rem;
+  margin-bottom: 1.25rem;
+}
+
+input[type="text"] {
+  flex: 1;
+  padding: .65rem .9rem;
+  border: 2px solid transparent;
+  border-radius: .625rem;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+input[type="text"]:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px #6366f12e;
 }
 
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  border: none;
+  border-radius: .625rem;
+  padding: .55rem .95rem;
+  font-size: .95rem;
+  font-weight: 500;
+  transition: .2s ease, transform .15s ease;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+button:active {
+  transform: scale(.96);
 }
+
+/* primary button */
+.addbtn {
+  background: var(--accent);
+  color: #fff;
+}
+.addbtn:hover {
+  background: var(--accent-dark);
+}
+
+/* list styling */
+.lists {
+  counter-reset: index;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.lists li {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .7rem .9rem;
+  border-radius: .8rem;
+  background: #f9fafb;
+  margin-bottom: .65rem;
+  transition: background .2s ease;
+}
+
+.lists li:hover {
+  background: #f3f4f6;
+}
+
+.lists li::before {
+  counter-increment: index;
+  content: counter(index);
+  font-weight: 600;
+  width: 1.75rem;
+  height: 1.75rem;
+  display: grid;
+  place-items: center;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 50%;
+}
+
+.text {
+  flex: 1;
+  word-break: break-word;
+}
+
+/* control buttons */
+.deletebtn {
+  background: var(--danger);
+  color: #fff;
+}
+.deletebtn:hover {
+  background: var(--danger-dark);
+}
+
+.upbtn,
+.downbtn {
+  background: var(--accent);
+  color: #fff;
+}
+.upbtn:hover,
+.downbtn:hover {
+  background: var(--accent-dark);
+}
+
+/* smooth button icons (optional) */
+.upbtn::before { content: "⏶"; }
+.downbtn::before { content: "⏷"; }
+.deletebtn::before { content: "✕"; }
+.addbtn::before { content: "＋"; margin-right: .35em; }
+
+
